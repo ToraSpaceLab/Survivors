@@ -2,10 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://157u8i2fen34" path="res://scenes/game_camera/game_camera.tscn" id="1_7xqpk"]
 [ext_resource type="TileSet" uid="uid://c65unnjyof4ru" path="res://resources/tileset.tres" id="1_bh6di"]
+[ext_resource type="PackedScene" uid="uid://fkuwipubfhgf" path="res://scenes/manager/enemy_manager.tscn" id="1_s4oud"]
 [ext_resource type="PackedScene" uid="uid://8ejylbqrb6kd" path="res://scenes/player/player.tscn" id="1_ty46k"]
-[ext_resource type="PackedScene" uid="uid://66bjjkexucfi" path="res://scenes/basic_enemy/basic_enemy.tscn" id="4_dqn0h"]
 
 [node name="Main" type="Node"]
+
+[node name="EnemyManager" parent="." instance=ExtResource("1_s4oud")]
 
 [node name="GameCamera" parent="." instance=ExtResource("1_7xqpk")]
 
@@ -15,25 +17,4 @@ tile_map_data = PackedByteArray("AAAEAAIAAAAAAAQAAAAFAAIAAAABAAQAAAAGAAIAAAAAAAQ
 tile_set = ExtResource("1_bh6di")
 
 [node name="Player" parent="." instance=ExtResource("1_ty46k")]
-position = Vector2(49, 32)
-
-[node name="BasicEnemy" parent="." instance=ExtResource("4_dqn0h")]
-position = Vector2(483, 257)
-
-[node name="BasicEnemy2" parent="." instance=ExtResource("4_dqn0h")]
-position = Vector2(220, 271)
-
-[node name="BasicEnemy3" parent="." instance=ExtResource("4_dqn0h")]
-position = Vector2(529, 152)
-
-[node name="BasicEnemy4" parent="." instance=ExtResource("4_dqn0h")]
-position = Vector2(60, 237)
-
-[node name="BasicEnemy5" parent="." instance=ExtResource("4_dqn0h")]
-position = Vector2(126, 324)
-
-[node name="BasicEnemy6" parent="." instance=ExtResource("4_dqn0h")]
-position = Vector2(523, 328)
-
-[node name="BasicEnemy7" parent="." instance=ExtResource("4_dqn0h")]
-position = Vector2(351, 295)
+position = Vector2(322, 176)
