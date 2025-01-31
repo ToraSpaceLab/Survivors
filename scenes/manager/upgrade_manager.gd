@@ -16,9 +16,10 @@ func on_level_up(current_level: int):
 	if chosen_upgrade == null:
 		return
 	
-	var upgrade_screen_instance = upgrade_screen_scene.instantiate()
+	var upgrade_screen_instance = upgrade_screen_scene.instantiate() as UpgradeScreen
 	add_child(upgrade_screen_instance)
 	upgrade_screen_instance.set_ability_upgrades([chosen_upgrade] as Array[AbilityUpgrade])
+	upgrade_screen_instance.upgrade_selected.connect(on_upgrade_selected)
 
 
 func apply_upgrade(upgrade: AbilityUpgrade):
@@ -30,3 +31,7 @@ func apply_upgrade(upgrade: AbilityUpgrade):
 		}
 	else:
 		current_upgrades[upgrade.id]["quantity"] += 1
+	print(current_upgrades)
+
+func on_upgrade_selected(upgrade: AbilityUpgrade):
+	apply_upgrade(upgrade)
