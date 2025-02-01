@@ -4,7 +4,7 @@ const MAX_SPEED = 125
 const ACCELERATION_SMOOTHING = 25
 
 @onready var damage_interval_timer = $DamageIntervalTimer
-@onready var health_component = $HealthComponent
+@onready var health_component: HealthComponent = $HealthComponent
 @onready var health_bar = $HealthBar
 
 var number_colliding_bodies = 0
