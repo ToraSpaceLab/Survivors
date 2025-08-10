@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://pwjnvelec5bp"]
 
-[ext_resource type="Script" path="res://scenes/ui/experience_bar.gd" id="1_dntgc"]
+[ext_resource type="Script" uid="uid://2ttd43tk5xrj" path="res://scenes/ui/experience_bar.gd" id="1_dntgc"]
 
 [node name="ExperienceBar" type="CanvasLayer"]
 script = ExtResource("1_dntgc")

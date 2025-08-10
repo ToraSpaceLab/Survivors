@@ -1,6 +1,6 @@
 extends Node
 
-const SPAWN_RADIUS = 375
+const SPAWN_RADIUS = 200
 
 @export var basic_enemy_scene: PackedScene
 @export var arena_time_manager: AreanTimeManager
@@ -20,21 +20,19 @@ func get_spawn_position():
 	var player = get_tree().get_first_node_in_group("player") as Node2D
 	if player == null:
 		return Vector2.ZERO
-
-	var spawn_position = Vector2.ZERO
+	
 	var random_direction = Vector2.RIGHT.rotated(randf_range(0, TAU))
-	for i in 8:
-		spawn_position = player.global_position + (random_direction * SPAWN_RADIUS)
-
-		var query_paramaters = PhysicsRayQueryParameters2D.create(player.global_position, spawn_position, 1 << 0)
-		var result = get_tree().root.world_2d.direct_space_state.intersect_ray(query_paramaters)
-
-		if result.is_empty():
-			break
-		else:
-			random_direction = random_direction.rotated(deg_to_rad(90))
-
-	return spawn_position
+	var spawn_position = player.global_position + (random_direction * SPAWN_RADIUS)
+	
+	var query_paramaters = PhysicsRayQueryParameters2D.create(player.global_position, spawn_position, 1<<0)
+	var result = get_tree().root.world_2d.direct_space_state.intersect_ray(query_paramaters)
+	
+	if result.is_empty():
+		# we are clear
+		return spawn_position
+	else:
+		# we have a collision
+		return player.global_position
 
 
 func on_timer_timeout():

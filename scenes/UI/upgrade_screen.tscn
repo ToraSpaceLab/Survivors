@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjtbrccpu5yk5"]
 
-[ext_resource type="Script" path="res://scenes/ui/upgrade_screen.gd" id="1_l7jcg"]
+[ext_resource type="Script" uid="uid://rsuhg6pfij7y" path="res://scenes/ui/upgrade_screen.gd" id="1_l7jcg"]
 [ext_resource type="PackedScene" uid="uid://f1qtyquxrgqt" path="res://scenes/ui/ability_upgrade_card.tscn" id="1_sftk6"]
 
 [node name="UpgradeScreen" type="CanvasLayer"]
