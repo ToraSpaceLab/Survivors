@@ -1,6 +1,6 @@
 extends Node
 
-const SPAWN_RADIUS = 200
+const SPAWN_RADIUS_FIX = 20
 
 @export var basic_enemy_scene: PackedScene
 @export var arena_time_manager: AreanTimeManager
@@ -8,31 +8,40 @@ const SPAWN_RADIUS = 200
 @onready var timer = $Timer
 
 var base_spawn_time = 0
+var spawn_radius = 0
 
 
 func _ready() -> void:
 	base_spawn_time = timer.wait_time
 	timer.timeout.connect(on_timer_timeout)
 	arena_time_manager.arena_difficulty_increased.connect(on_arena_difficulty_increased)
+	spawn_radius = (get_viewport().get_visible_rect().size.x / 2) - SPAWN_RADIUS_FIX
+	print("spawn_radius: %f" % [spawn_radius])
 
 
 func get_spawn_position():
-	var player = get_tree().get_first_node_in_group("player") as Node2D
+	var found_spawn_place = false;
+	var player = get_tree().get_first_node_in_group("player") as Node2D;
 	if player == null:
-		return Vector2.ZERO
+		return Vector2.ZERO;
+		
+	var spawn_position = Vector2.ZERO;
 	
-	var random_direction = Vector2.RIGHT.rotated(randf_range(0, TAU))
-	var spawn_position = player.global_position + (random_direction * SPAWN_RADIUS)
+	while not found_spawn_place:
+		var random_direction = Vector2.RIGHT.rotated(randf_range(0, TAU));
+		for i in 4:
+			spawn_position = player.global_position + (random_direction * spawn_radius);
+			
+			var query_paramaters = PhysicsRayQueryParameters2D.create(player.global_position, spawn_position, 1<<0);
+			var result = get_tree().root.world_2d.direct_space_state.intersect_ray(query_paramaters);
+		
+			if result.is_empty():
+				found_spawn_place = true;
+				break;
+			else:
+				random_direction = random_direction.rotated(deg_to_rad(90));
 	
-	var query_paramaters = PhysicsRayQueryParameters2D.create(player.global_position, spawn_position, 1<<0)
-	var result = get_tree().root.world_2d.direct_space_state.intersect_ray(query_paramaters)
-	
-	if result.is_empty():
-		# we are clear
-		return spawn_position
-	else:
-		# we have a collision
-		return player.global_position
+	return spawn_position;
 
 
 func on_timer_timeout():
