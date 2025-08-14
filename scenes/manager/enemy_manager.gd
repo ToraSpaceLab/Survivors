@@ -3,6 +3,7 @@ extends Node
 const SPAWN_RADIUS_FIX = 20
 
 @export var basic_enemy_scene: PackedScene
+@export var wizard_enemy_scene: PackedScene
 @export var arena_time_manager: AreanTimeManager
 
 @onready var timer = $Timer
@@ -10,12 +11,16 @@ const SPAWN_RADIUS_FIX = 20
 var base_spawn_time = 0
 var spawn_radius = 0
 
+var enemy_table = WeightedTable.new();
+
 
 func _ready() -> void:
-	base_spawn_time = timer.wait_time
-	timer.timeout.connect(on_timer_timeout)
-	arena_time_manager.arena_difficulty_increased.connect(on_arena_difficulty_increased)
-	spawn_radius = (get_viewport().get_visible_rect().size.x / 2) - SPAWN_RADIUS_FIX
+	enemy_table.add_items(basic_enemy_scene, 10);
+	
+	base_spawn_time = timer.wait_time;
+	timer.timeout.connect(on_timer_timeout);
+	arena_time_manager.arena_difficulty_increased.connect(on_arena_difficulty_increased);
+	spawn_radius = (get_viewport().get_visible_rect().size.x / 2) - SPAWN_RADIUS_FIX;
 	print("spawn_radius: %f" % [spawn_radius])
 
 
@@ -47,22 +52,27 @@ func get_spawn_position():
 func on_timer_timeout():
 	timer.start()
 	
-	var player = get_tree().get_first_node_in_group("player") as Node2D
+	var player = get_tree().get_first_node_in_group("player") as Node2D;
 	if player == null:
-		return
+		return;
 
-	var enemy = basic_enemy_scene.instantiate() as Node2D
+	var enemy_scene = enemy_table.pick_item();
+	var enemy = enemy_scene.instantiate() as Node2D;
 	
-	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
+	var entities_layer = get_tree().get_first_node_in_group("entities_layer");
 	if entities_layer == null:
-		return
+		return;
 		
 	entities_layer.add_child(enemy)
 	enemy.global_position = get_spawn_position()
 
 
 func on_arena_difficulty_increased(arena_difficulty: int):
-	var time_off = (.1 / 12) * arena_difficulty
-	time_off = min(time_off, .7)
-	print(time_off)
-	timer.wait_time = base_spawn_time - time_off
+	print("Arena Difficulty %s" % arena_difficulty)
+	var time_off = (.1 / 12) * arena_difficulty;
+	time_off = min(time_off, .7);
+	print(time_off);
+	timer.wait_time = base_spawn_time - time_off;
+	
+	if arena_difficulty == 3:
+		enemy_table.add_items(wizard_enemy_scene, 20);
