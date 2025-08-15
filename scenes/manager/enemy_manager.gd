@@ -20,7 +20,7 @@ func _ready() -> void:
 	base_spawn_time = timer.wait_time;
 	timer.timeout.connect(on_timer_timeout);
 	arena_time_manager.arena_difficulty_increased.connect(on_arena_difficulty_increased);
-	spawn_radius = (get_viewport().get_visible_rect().size.x / 2) - SPAWN_RADIUS_FIX;
+	spawn_radius = get_viewport().get_visible_rect().size.x / 2;
 	print("spawn_radius: %f" % [spawn_radius])
 
 
@@ -35,11 +35,11 @@ func get_spawn_position():
 	while not found_spawn_place:
 		var random_direction = Vector2.RIGHT.rotated(randf_range(0, TAU));
 		for i in 4:
-			spawn_position = player.global_position + (random_direction * spawn_radius);
+			spawn_position = player.global_position + (random_direction * (spawn_radius + SPAWN_RADIUS_FIX));
 			
 			var query_paramaters = PhysicsRayQueryParameters2D.create(player.global_position, spawn_position, 1<<0);
 			var result = get_tree().root.world_2d.direct_space_state.intersect_ray(query_paramaters);
-		
+#		
 			if result.is_empty():
 				found_spawn_place = true;
 				break;
@@ -74,5 +74,5 @@ func on_arena_difficulty_increased(arena_difficulty: int):
 	print(time_off);
 	timer.wait_time = base_spawn_time - time_off;
 	
-	if arena_difficulty == 3:
+	if arena_difficulty == 1:
 		enemy_table.add_items(wizard_enemy_scene, 20);
