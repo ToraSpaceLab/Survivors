@@ -35,6 +35,10 @@ window/stretch/mode="viewport"
 
 enemy=""
 
+[gui]
+
+theme/custom="uid://bam26cmtt0gpj"
+
 [input]
 
 move_left={
