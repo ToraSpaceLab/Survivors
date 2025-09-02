@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://yucsrh5aovnt"]
+
+[ext_resource type="AudioStream" uid="uid://1ohsksvdpnyk" path="res://assets/audio/Beat One.mp3" id="1_crwak"]
+[ext_resource type="Script" uid="uid://bxo8meah32jd7" path="res://scenes/autoload/music_player.gd" id="2_xlf3v"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_crwak")
+volume_db = -12.0
+autoplay = true
+bus = &"music"
+script = ExtResource("2_xlf3v")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true

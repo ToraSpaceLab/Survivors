@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://8ejylbqrb6kd"]
+[gd_scene load_steps=24 format=3 uid="uid://8ejylbqrb6kd"]
 
 [ext_resource type="Texture2D" uid="uid://c3d2wxkok2yys" path="res://scenes/game_object/player/player.png" id="1_2ybfy"]
 [ext_resource type="Script" uid="uid://bx8qy8voygqmx" path="res://scenes/game_object/player/player.gd" id="1_k4hjh"]
@@ -11,6 +11,11 @@
 [ext_resource type="AudioStream" uid="uid://8y1sxofmdd78" path="res://assets/audio/impactMining_002.ogg" id="8_l1g56"]
 [ext_resource type="AudioStream" uid="uid://bp77tssloyon4" path="res://assets/audio/impactMining_003.ogg" id="9_llc7q"]
 [ext_resource type="AudioStream" uid="uid://da5b53yaw7hfg" path="res://assets/audio/impactMining_004.ogg" id="10_bfkik"]
+[ext_resource type="AudioStream" uid="uid://vv7pc30s7bme" path="res://assets/audio/impactGeneric_light_000.ogg" id="11_bfkik"]
+[ext_resource type="AudioStream" uid="uid://qvtgiik31hwx" path="res://assets/audio/impactGeneric_light_001.ogg" id="12_gme53"]
+[ext_resource type="AudioStream" uid="uid://cbp8x5uhsp126" path="res://assets/audio/impactGeneric_light_002.ogg" id="13_3uig4"]
+[ext_resource type="AudioStream" uid="uid://b3vg40nos40ka" path="res://assets/audio/impactGeneric_light_003.ogg" id="14_oxadg"]
+[ext_resource type="AudioStream" uid="uid://cnbwc8oevjp10" path="res://assets/audio/impactGeneric_light_004.ogg" id="15_va4cl"]
 
 [sub_resource type="Animation" id="Animation_tj6oj"]
 length = 0.001
@@ -137,6 +142,12 @@ acceleration = 25.0
 
 [node name="HitRandomStreamPlayer" parent="." instance=ExtResource("5_gbew5")]
 streams = Array[AudioStream]([ExtResource("6_oxhc3"), ExtResource("7_mxgtx"), ExtResource("8_l1g56"), ExtResource("9_llc7q"), ExtResource("10_bfkik")])
+
+[node name="VialCollectRandomStreamPlayer" parent="." instance=ExtResource("5_gbew5")]
+process_mode = 3
+streams = Array[AudioStream]([ExtResource("11_bfkik"), ExtResource("12_gme53"), ExtResource("13_3uig4"), ExtResource("14_oxadg"), ExtResource("15_va4cl")])
+min_pitch = 1.5
+max_pitch = 1.8
 
 [node name="DamageIntervalTimer" type="Timer" parent="."]
 wait_time = 0.5

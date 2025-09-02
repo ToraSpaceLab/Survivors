@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://f1qtyquxrgqt"]
+[gd_scene load_steps=22 format=3 uid="uid://f1qtyquxrgqt"]
 
 [ext_resource type="Script" uid="uid://c4g7umtbr0a4y" path="res://scenes/ui/ability_upgrade_card.gd" id="1_iepl3"]
 [ext_resource type="PackedScene" uid="uid://b52oasqkw27q0" path="res://scenes/component/random_stream_player_component.tscn" id="2_xicjk"]
+[ext_resource type="AudioStream" uid="uid://dfnq0wy0io8mt" path="res://assets/audio/rollover2.ogg" id="3_g40w5"]
 [ext_resource type="AudioStream" uid="uid://dm5k7hs4073qt" path="res://assets/audio/switch1.ogg" id="3_ksxgh"]
 [ext_resource type="AudioStream" uid="uid://cm8cp7cxutd7u" path="res://assets/audio/switch2.ogg" id="4_g40w5"]
 [ext_resource type="AudioStream" uid="uid://dxixqrhldl5xx" path="res://assets/audio/switch3.ogg" id="5_wv0wr"]
@@ -207,8 +208,8 @@ pivot_offset = Vector2(75, 75)
 script = ExtResource("1_iepl3")
 
 [node name="HoverPlayerComponent" parent="." instance=ExtResource("2_xicjk")]
-volume_db = -8.0
-streams = Array[AudioStream]([ExtResource("3_ksxgh"), ExtResource("4_g40w5"), ExtResource("5_wv0wr"), ExtResource("6_puu13"), ExtResource("7_kt4ni"), ExtResource("8_r6bay"), ExtResource("9_ut4pq"), ExtResource("10_m713t"), ExtResource("11_gnty3"), ExtResource("12_vel0p")])
+volume_db = -10.0
+streams = Array[AudioStream]([ExtResource("3_g40w5")])
 
 [node name="ClickPlayerComponent" parent="." instance=ExtResource("2_xicjk")]
 streams = Array[AudioStream]([ExtResource("3_ksxgh"), ExtResource("4_g40w5"), ExtResource("5_wv0wr"), ExtResource("6_puu13"), ExtResource("7_kt4ni"), ExtResource("8_r6bay"), ExtResource("9_ut4pq"), ExtResource("10_m713t"), ExtResource("11_gnty3"), ExtResource("12_vel0p")])
