@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://f1qtyquxrgqt"]
+[gd_scene load_steps=22 format=3 uid="uid://ck5s3wfi4tqk"]
 
 [ext_resource type="Script" uid="uid://c4g7umtbr0a4y" path="res://scenes/ui/ability_upgrade_card.gd" id="1_iepl3"]
 [ext_resource type="PackedScene" uid="uid://b52oasqkw27q0" path="res://scenes/component/random_stream_player_component.tscn" id="2_xicjk"]
