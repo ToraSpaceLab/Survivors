@@ -40,6 +40,7 @@ window/stretch/mode="viewport"
 
 enemy=""
 upgrade_card=""
+meta_upgrade_card=""
 
 [gui]
 
