@@ -33,5 +33,9 @@ func add_meta_upgrade(upgrade: MetaUpgrade):
 	save()
 
 
+func get_upgrade_count(upgrade_id: String):
+	return Utility.get_nested(save_data, 0, ["meta_upgrades", upgrade_id, "quantity"])
+
+
 func on_experience_collected(number: float):
 	save_data["meta_upgrade_currency"] += number

@@ -5,6 +5,8 @@ class_name MetaUpgradeCard extends PanelContainer
 @onready var progress_bar: ProgressBar = %ProgressBar
 @onready var purchase_button: Button = %PurchaseButton
 @onready var progress_label: Label = %ProgressLabel
+@onready var count_label: Label = %CountLabel
+
 
 var _upgrade: MetaUpgrade
 
@@ -21,12 +23,17 @@ func set_meta_upgrade(upgrade: MetaUpgrade):
 
 
 func update_progress():
+	var current_quantity = Utility.get_nested(MetaProgression.save_data, 0, ["meta_upgrades", _upgrade.id, "quantity"])
+	var is_maxed = current_quantity == _upgrade.max_quantity
 	var currency = MetaProgression.save_data["meta_upgrade_currency"]
 	var percent = currency / _upgrade.experience_cost
 	percent = min(percent, 1)
 	progress_bar.value = percent
-	purchase_button.disabled = percent < 1
+	purchase_button.disabled = percent < 1 || is_maxed
+	if is_maxed:
+		purchase_button.text = "Max"
 	progress_label.text = "%d/%d" %[currency, _upgrade.experience_cost]
+	count_label.text = "x%d" % current_quantity
 
 
 func select_card():
